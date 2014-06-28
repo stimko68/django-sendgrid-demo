@@ -1,0 +1,5 @@
+django-admin-bootstrapped
+Django>=1.6.5
+mysql-python
+sendgrid
+uwsgi
