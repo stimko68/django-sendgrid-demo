@@ -62,8 +62,10 @@ WSGI_APPLICATION = 'sendgrid_demo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sendgrid_demo',
+        'USER': 'sendgrid',
+        'PASSWORD': 'S3n@dg51d!',
     }
 }
 
@@ -84,14 +86,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
-
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR + '/static')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR + '/templates'),
+)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR + '/static'),
 )
 
 TEMPLATE_LOADERS = (
@@ -103,7 +107,7 @@ TEMPLATE_LOADERS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

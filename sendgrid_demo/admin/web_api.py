@@ -2,6 +2,7 @@
 Program that handles the Web API calls
 """
 import argparse
+import json
 import sendgrid
 import urllib
 
@@ -81,4 +82,7 @@ class WebAPI(object):
 
 if __name__ == "__main__":
     api = WebAPI(USERNAME, PASSWORD)
-    print api.send_email('nick.simko@mrworf.com', 'simko33f@gmail.com', 'Testing', 'Test from Python script in demo app')
+    result = json.loads(api.get_stats())
+
+    for item in result:
+        print item

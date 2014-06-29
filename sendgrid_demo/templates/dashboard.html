@@ -36,35 +36,80 @@
 <div class="table-responsive"><!--results_table-->
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>Date</th>
-            <th>Emails Delivered</th>
-            <th>Unsubscribes</th>
-            <th>Invalid Email Addresses</th>
-            <th>Bounces</th>
-            <th>Opens</th>
-            <th>Unique Opens</th>
-            <th>Clicks</th>
-            <th>Unique Clicks</th>
-            <th>Spam Reports</th>
-        </tr>
+            <tr>
+                <th>Date</th>
+                <th>Emails Delivered</th>
+                <th>Unsubscribes</th>
+                <th>Invalid Email Addresses</th>
+                <th>Bounces</th>
+                <th>Opens</th>
+                <th>Unique Opens</th>
+                <th>Clicks</th>
+                <th>Unique Clicks</th>
+                <th>Spam Reports</th>
+            </tr>
         </thead>
         <tbody>
-            {% for item in results_list %}
             <tr>
-                <td>{{ item.date }}</td>
-                <td>{{ item.delivered }}</td>
-                <td>{{ item.unsubscribes }}</td>
-                <td>{{ item.invalid_email }}</td>
-                <td>{{ item.bounces }}</td>
-                <td>{{ item.opens }}</td>
-                <td>{{ item.unique_opens }}</td>
-                <td>{{ item.clicks }}</td>
-                <td>{{ item.unique_clicks }}</td>
-                <td>{{ item.spamreports }}</td>
+                <td>{{ date }}</td>
+                <td>{{ delivered }}</td>
+                <td>{{ unsubscribes }}</td>
+                <td>{{ invalid_email }}</td>
+                <td>{{ bounces }}</td>
+                <td>{{ opens }}</td>
+                <td>{{ unique_opens }}</td>
+                <td>{{ clicks }}</td>
+                <td>{{ unique_clicks }}</td>
+                <td>{{ spamreports }}</td>
             </tr>
-            {% endfor %}
         </tbody>
     </table>
 </div><!--./results_table-->
+{% endblock %}
+
+{% block datescript %}
+<script>
+    if (top.location != location) {
+        top.location.href = document.location.href ;
+      }
+            $(function(){
+                window.prettyPrint && prettyPrint();
+                $('#dp1').datepicker({
+                    format: 'mm/dd/yyyy'
+                });
+                $('#dp2').datepicker({
+                    format: 'mm/dd/yyyy'
+                });
+                $('#dpYears').datepicker();
+                $('#dpMonths').datepicker();
+
+                var startDate = new Date(2012,1,20);
+                var endDate = new Date(2012,1,25);
+
+            // disabling dates
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            var checkin = $('#dpd1').datepicker({
+              onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+              }
+            }).on('changeDate', function(ev) {
+              if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+              }
+              checkin.hide();
+              $('#dpd2')[0].focus();
+            }).data('datepicker');
+            var checkout = $('#dpd2').datepicker({
+              onRender: function(date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+              }
+            }).on('changeDate', function(ev) {
+              checkout.hide();
+            }).data('datepicker');
+            });
+</script>
 {% endblock %}
