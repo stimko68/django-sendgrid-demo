@@ -62,10 +62,8 @@ WSGI_APPLICATION = 'sendgrid_demo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sendgrid_demo',
-        'USER': 'sendgrid',
-        'PASSWORD': 'S3n@dg51d!',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

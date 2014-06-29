@@ -1,14 +1,70 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block dash %}class="active"{% endblock %}
+
 {% block css %}
     <style type="text/css">
-        h1 {
-            padding: 25px;
-        }
+        body {
+			padding-top: 25px;
+		}
+		.date_range {
+			display: inline-block;
+		}
     </style>
 {% endblock %}
 
 {% block content %}
 <h1 class="page-header">Dashboard</h1>
+<p>This page shows some of the summary statistics from the Web API</p>
+<h2 class="sub-header">Statistics</h2>
+<div class="well"><!--date_picker-->
+    <p>Choose a date range (optional)</p>
+
+    <div class="date_range">
+        <label>Start Date</label>
+        <input type="text" class="span2 form-control" id="dp1">
+    </div>
+    <div class="date_range">
+        <label>End Date</label>
+        <input type="text" class="span2 form-control" id="dp2">
+    </div>
+    <div class="date_range">
+        <button type="button" class="btn btn-default">Submit</button>
+    </div>
+</div><!--./date_picker-->
+<div class="table-responsive"><!--results_table-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Emails Delivered</th>
+            <th>Unsubscribes</th>
+            <th>Invalid Email Addresses</th>
+            <th>Bounces</th>
+            <th>Opens</th>
+            <th>Unique Opens</th>
+            <th>Clicks</th>
+            <th>Unique Clicks</th>
+            <th>Spam Reports</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in results_list %}
+            <tr>
+                <td>{{ item.date }}</td>
+                <td>{{ item.delivered }}</td>
+                <td>{{ item.unsubscribes }}</td>
+                <td>{{ item.invalid_email }}</td>
+                <td>{{ item.bounces }}</td>
+                <td>{{ item.opens }}</td>
+                <td>{{ item.unique_opens }}</td>
+                <td>{{ item.clicks }}</td>
+                <td>{{ item.unique_clicks }}</td>
+                <td>{{ item.spamreports }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div><!--./results_table-->
 {% endblock %}
