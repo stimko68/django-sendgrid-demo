@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block email %}class="active"{% endblock %}
+
+{% block css %}
+    <style type="text/css">
+        body {
+			padding-top: 25px;
+		}
+		.date_range {
+			display: inline-block;
+		}
+        .form-control {
+            margin-bottom: 5px;
+        }
+        #email_body {
+            rows: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Send an Email</h1>
+<p>Use the form below to send an email using the API.</p>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="text" class="form-control" placeholder="Your Email Address">
+        </div>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" placeholder="Recipient Email Address">
+        </div>
+    </div>
+    <input type="text" class="form-control" placeholder="Message" id="email_body">
+</div>
+<div>
+    <button type="button" class="btn btn-primary">Send Email</button>
+</div>
+{% endblock %}

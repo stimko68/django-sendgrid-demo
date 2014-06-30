@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^$', views.index),
     url(r'^index', views.index),
     url(r'^dashboard', views.dashboard),
+    url(r'^send_email', views.send_email),
 )
