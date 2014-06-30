@@ -13,9 +13,9 @@ def dashboard(request):
     user = 'stimko68'
     api_key = '6gpk2PXv5GyD'
 
-    #api = web_api.WebAPI(user, api_key)
-    #results_list = json.loads(api.get_stats())
-    results_list = [{
+    api = web_api.WebAPI(user, api_key)
+    results_list = json.loads(api.get_stats())
+    """results_list = [{
         'delivered': 0,
         'unsubscribes': 0,
         'opens': 0,
@@ -49,6 +49,6 @@ def dashboard(request):
         'clicks': 200,
         'unique_clicks': 200,
         'blocked': 0
-    }]
+    }]"""
 
     return render(request, 'dashboard.html', results_list[0])
